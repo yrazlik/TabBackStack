@@ -26,6 +26,7 @@ public class AFragment extends Fragment{
     TextView text;
     Button buttonA, buttonB;
     ImageView image, image2, image3, image4, image5;
+    String id;
 
     MyObject m;
 
@@ -34,6 +35,8 @@ public class AFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("THETABSTACKAPP", "THETABSTACKAPP A onCreateView()");
         View v = inflater.inflate(R.layout.fragment_a, container, false);
+
+        id = UUID.randomUUID().toString();
 
         m = new MyObject();
         m.randomString = UUID.randomUUID().toString();
@@ -75,7 +78,7 @@ public class AFragment extends Fragment{
         image4 = (ImageView) v.findViewById(R.id.image4);
         image5 = (ImageView) v.findViewById(R.id.image5);
 
-        text.setText(UUID.randomUUID().toString());
+        text.setText(id);
 
         buttonA.setOnClickListener(new View.OnClickListener() {
             @Override

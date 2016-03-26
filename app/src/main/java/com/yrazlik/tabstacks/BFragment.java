@@ -28,11 +28,15 @@ public class BFragment extends Fragment{
 
     MyObject m;
 
+    String id;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("THETABSTACKAPP", "THETABSTACKAPP B onCreateView()");
         View v = inflater.inflate(R.layout.fragment_b, container, false);
+
+        id = UUID.randomUUID().toString();
 
         m = new MyObject();
         m.randomString = UUID.randomUUID().toString();
@@ -72,7 +76,7 @@ public class BFragment extends Fragment{
         image4 = (ImageView) v.findViewById(R.id.image4);
         image5 = (ImageView) v.findViewById(R.id.image5);
 
-        text.setText(UUID.randomUUID().toString());
+        text.setText(id);
 
         buttonA.setOnClickListener(new View.OnClickListener() {
             @Override
