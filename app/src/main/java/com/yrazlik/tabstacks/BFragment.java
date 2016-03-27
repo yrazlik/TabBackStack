@@ -36,7 +36,7 @@ public class BFragment extends Fragment{
         Log.d("THETABSTACKAPP", "THETABSTACKAPP B onCreateView()");
         View v = inflater.inflate(R.layout.fragment_b, container, false);
 
-        id = UUID.randomUUID().toString();
+
 
         m = new MyObject();
         m.randomString = UUID.randomUUID().toString();
@@ -106,6 +106,7 @@ public class BFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = UUID.randomUUID().toString();
         Log.d("THETABSTACKAPP", "THETABSTACKAPP B onCreate()");
     }
 

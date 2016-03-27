@@ -36,8 +36,6 @@ public class AFragment extends Fragment{
         Log.d("THETABSTACKAPP", "THETABSTACKAPP A onCreateView()");
         View v = inflater.inflate(R.layout.fragment_a, container, false);
 
-        id = UUID.randomUUID().toString();
-
         m = new MyObject();
         m.randomString = UUID.randomUUID().toString();
         Random generator = new Random();
@@ -108,6 +106,7 @@ public class AFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = UUID.randomUUID().toString();
         Log.d("THETABSTACKAPP", "THETABSTACKAPP A onCreate()");
     }
 
@@ -157,5 +156,10 @@ public class AFragment extends Fragment{
     public void onDetach() {
         super.onDetach();
         Log.d("THETABSTACKAPP", "THETABSTACKAPP A onDetach()");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }
