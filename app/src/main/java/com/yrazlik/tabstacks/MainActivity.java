@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static AFragment aFragment;
-    public static BFragment bFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        aFragment = new AFragment();
+        AFragment aFragment = new AFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, aFragment).commit();
     }
 
@@ -58,15 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void replace(String fr){
         if(fr.equalsIgnoreCase("a")){
-            if(aFragment == null){
-                aFragment = new AFragment();
-            }
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container, aFragment).commit();
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container, new AFragment()).commit();
         }else if(fr.equalsIgnoreCase("b")){
-            if(bFragment == null){
-                bFragment = new BFragment();
-            }
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,bFragment ).commit();
+            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,new BFragment() ).commit();
         }
     }
 }
