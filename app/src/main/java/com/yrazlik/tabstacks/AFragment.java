@@ -30,6 +30,14 @@ public class AFragment extends Fragment{
 
     MyObject m;
 
+    public AFragment(){
+        id = UUID.randomUUID().toString();
+    }
+
+    public String getID() {
+        return id;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,7 +114,6 @@ public class AFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        id = UUID.randomUUID().toString();
         Log.d("THETABSTACKAPP", "THETABSTACKAPP A onCreate()");
     }
 

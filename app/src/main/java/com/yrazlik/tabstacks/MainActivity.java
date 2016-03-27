@@ -1,6 +1,7 @@
 package com.yrazlik.tabstacks;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,9 +11,11 @@ import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.Stack;
+
 public class MainActivity extends AppCompatActivity {
 
-
+    Stack<String> backstack = new Stack<>();
 
 
     @Override
@@ -22,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         AFragment aFragment = new AFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, aFragment).commit();
+        backstack.push(aFragment.getID());
+        getSupportFragmentManager().beginTransaction().add(R.id.container, aFragment, aFragment.getID()).commit();
     }
 
     @Override
@@ -49,18 +53,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-       if(getSupportFragmentManager().getBackStackEntryCount() > 0){
-           getSupportFragmentManager().popBackStack();
+       if(backstack.size() > 1){
+           String tag = backstack.pop();
+           Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(tag);
+           getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+           String popTag = backstack.peek();
+           Fragment f = getSupportFragmentManager().findFragmentByTag(popTag);
+           getSupportFragmentManager().beginTransaction().attach(f).commit();
        }else{
            Toast.makeText(getApplicationContext(), "EXIT?", Toast.LENGTH_SHORT).show();
        }
     }
 
     public void replace(String fr){
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        getSupportFragmentManager().beginTransaction().detach(currentFragment).commit();
         if(fr.equalsIgnoreCase("a")){
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container, new AFragment()).commit();
+            AFragment aFragment = new AFragment();
+            backstack.push(aFragment.getID());
+            getSupportFragmentManager().beginTransaction().add(R.id.container, aFragment, aFragment.getID()).commit();
         }else if(fr.equalsIgnoreCase("b")){
-            getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.container,new BFragment() ).commit();
+            BFragment bFragment = new BFragment();
+            backstack.push(bFragment.getID());
+            getSupportFragmentManager().beginTransaction().add(R.id.container, bFragment, bFragment.getID()).commit();
         }
     }
 }
